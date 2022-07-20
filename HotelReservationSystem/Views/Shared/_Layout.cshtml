@@ -7,40 +7,70 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HotelReservationSystem.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HotelReservationSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+<body class="w3-light-grey">
+
+<!-- Navigation Bar -->
+    <div class="w3-bar w3-white w3-large">
+      <a href="#" class="w3-bar-item w3-button w3-red w3-mobile"><i class="fa fa-bed w3-margin-right"></i>Лого</a>
+      <a href="#rooms" class="w3-bar-item w3-button w3-mobile">Номера</a>
+      <a href="#about" class="w3-bar-item w3-button w3-mobile">О нас</a>
+      <a href="#contact" class="w3-bar-item w3-button w3-mobile">Контакт</a>
+      <a href="#contact" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Заказать</a>
+    </div>
+    <header class="w3-display-container w3-content" style="max-width:1500px;">
+      <img class="w3-image" src="https://www.w3schools.com/w3images/hotel.jpg" alt="The Hotel" style="min-width:1000px" width="1500" height="800">
+      <div class="w3-display-left w3-padding w3-col l6 m8">
+        <div class="w3-container w3-red">
+          <h2><i class="fa fa-bed w3-margin-right"></i>Название Гостиницы</h2>
+        </div>
+        <div class="w3-container w3-white w3-padding-16">
+          <form action="/action_page.php" target="_blank">
+            <div class="w3-row-padding" style="margin:0 -16px;">
+              <div class="w3-half w3-margin-bottom">
+                <label><i class="fa fa-calendar-o"></i> Заезд</label>
+                <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckIn" required>
+              </div>
+              <div class="w3-half">
+                <label><i class="fa fa-calendar-o"></i> Выезд</label>
+                <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckOut" required>
+              </div>
             </div>
-        </nav>
+            <div class="w3-row-padding" style="margin:8px -16px;">
+              <div class="w3-half w3-margin-bottom">
+                <label><i class="fa fa-male"></i> Взрослые</label>
+                <input class="w3-input w3-border" type="number" value="1" name="Adults" min="1" max="6">
+              </div>
+              <div class="w3-half">
+                <label><i class="fa fa-child"></i> Дети</label>
+              <input class="w3-input w3-border" type="number" value="0" name="Kids" min="0" max="6">
+              </div>
+            </div>
+            <button class="w3-button w3-dark-grey" type="submit"><i class="fa fa-search w3-margin-right"></i> Поиск</button>
+          </form>
+        </div>
+      </div>
     </header>
-    <div class="container">
+    <div class="w3-content" style="max-width:1532px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - HotelReservationSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="w3-padding-32 w3-black w3-center w3-margin-top">
+      <h5>ГДЕ НАС НАЙТИ</h5>
+      <div class="w3-xlarge w3-padding-16">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+      </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
