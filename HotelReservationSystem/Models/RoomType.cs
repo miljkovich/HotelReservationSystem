@@ -9,7 +9,7 @@
         public int RoomArea { get; set; }
         public string? RoomImageURL { get; set; }
 
-        public ICollection<Room> Rooms { get; set; }
+        public ICollection<Room>? Rooms { get; set; }
 
     }
 }
