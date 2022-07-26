@@ -70,7 +70,7 @@ namespace HotelReservationSystem.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Date)]
             [Display(Name = "Дата рождения")]
-            public string BirthDate { get; set; }
+            public DateOnly BirthDate { get; set; }
 
             [Required]
             [Display(Name = "Национальность")]
@@ -83,6 +83,9 @@ namespace HotelReservationSystem.Areas.Identity.Pages.Account
 
             [Display(Name = "Город")]
             public string City { get; set; }
+
+            [Display(Name = "Адресс")]
+            public string Address { get; set; }
 
             [Display(Name = "Zip-код")]
             public string ZipCode { get; set; }
@@ -119,8 +122,19 @@ namespace HotelReservationSystem.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new ApplicationUser
+                {
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    BirthDate = Input.BirthDate,
+                    Nationality = Input.Nationality,
+                    Passport = Input.Passport,
+                    City = Input.City,
+                    Address = Input.Address,
+                    ZipCode = Input.ZipCode,    
 
+                };
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
