@@ -13,6 +13,48 @@
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <h2>Создать новую учетную запись</h2>
                 <hr />
+                
+                <div class="form-floating">
+                    <input asp-for="Input.FirstName" class="form-control" />
+                    <label asp-for="Input.FirstName"></label>
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.LastName" class="form-control" />
+                    <label asp-for="Input.LastName"></label>
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.BirthDate" class="form-control" />
+                    <label asp-for="Input.BirthDate"></label>
+                    <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.Nationality" class="form-control" />
+                    <label asp-for="Input.Nationality"></label>
+                    <span asp-validation-for="Input.Nationality" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating">
+                    <input asp-for="Input.Passport" class="form-control" />
+                    <label asp-for="Input.Passport"></label>
+                    <span asp-validation-for="Input.Passport" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.City" class="form-control" />
+                    <label asp-for="Input.City"></label>
+                    <span asp-validation-for="Input.City" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.Address" class="form-control" />
+                    <label asp-for="Input.Address"></label>
+                    <span asp-validation-for="Input.Address" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.ZipCode" class="form-control" />
+                    <label asp-for="Input.ZipCode"></label>
+                    <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
+                </div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
@@ -29,6 +71,7 @@
                     <label asp-for="Input.ConfirmPassword">Потвердите пароль</label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
+
                 <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-danger">Зарегистрироваться</button>
             </form>
         </div>
