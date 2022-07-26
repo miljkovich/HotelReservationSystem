@@ -5,15 +5,14 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <a class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Здравствуйте @User.Identity?.Name!</a>
+    <a class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?.Name</a>
 @*    <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>*@
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        <form id="logOutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <a class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile" onclick="submitLogoutForm()">Выйти</a>
         </form>
-    </li>
+      
       <a href="#contact" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Заказать</a>
 }
 else
@@ -21,4 +20,11 @@ else
         <a class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile" asp-area="Identity" asp-page="/Account/Register">Зарегистрироваться</a>
         <a class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile" asp-area="Identity" asp-page="/Account/Login">Войти</a>
 }
+
+<script>
+    function submitLogoutForm()
+    {
+        document.getElementById("logOutForm").submit();
+    }
+</script>
 
