@@ -25,52 +25,82 @@ namespace HotelReservationSystem.Areas.Identity.Pages.Account.Manage
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string Username { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+
         [TempData]
         public string StatusMessage { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+
         [BindProperty]
         public InputModel Input { get; set; }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            [Display(Name = "Имя")]
+            public string FirstName { get; set; }
+            [Display(Name = "Фамилия")]
+            public string LastName { get; set; }
+
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Телефон")]
             public string PhoneNumber { get; set; }
+
+
+            [DataType(DataType.Date)]
+            [Display(Name = "Дата рождения")]
+            public DateTime BirthDate { get; set; }
+
+            [Required]
+            [Display(Name = "Национальность")]
+            public string Nationality { get; set; }
+
+            [Required]
+            [Display(Name = "Номер пасспорта")]
+            public string Passport { get; set; }
+
+
+            [Display(Name = "Город")]
+            public string City { get; set; }
+
+            [Display(Name = "Адресс")]
+            public string Address { get; set; }
+
+            [Display(Name = "Zip-код")]
+            public string ZipCode { get; set; }
+
+            [Display(Name = "Фото профиля")]
+            public byte[] ProfilePicture { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var birthDate = user.BirthDate;
+            var nationality = user.Nationality;
+            var passport = user.Passport;
+            var city = user.City;
+            var address = user.Address;
+            var zipCode = user.ZipCode;
+            var firstName = user.FirstName;
+            var lastName = user.LastName;
+            var profilePicture = user.ProfilePicture;
+
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                BirthDate = birthDate,
+                Nationality = nationality,
+                Passport = passport,    
+                City = city,
+                Address = address,
+                ZipCode = zipCode,
+                FirstName = firstName,
+                LastName = lastName,
+                ProfilePicture = profilePicture
             };
         }
 
@@ -111,8 +141,58 @@ namespace HotelReservationSystem.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            var birthDate = user.BirthDate;
+            if (Input.BirthDate != birthDate)
+            {
+                user.BirthDate = Input.BirthDate;
+                await _userManager.UpdateAsync(user);
+            }
+            var nationality = user.Nationality;
+            if (Input.Nationality != nationality)
+            {
+                user.Nationality = Input.Nationality;
+                await _userManager.UpdateAsync(user);
+            }
+            var passport = user.Passport;
+            if (Input.Passport != passport)
+            {
+                user.Passport = Input.Passport;
+                await _userManager.UpdateAsync(user);
+            }
+            var city = user.City;
+            if (Input.City != city)
+            {
+                user.City = Input.City;
+                await _userManager.UpdateAsync(user);
+            }
+            var address = user.Address;
+            if (Input.Address != address)
+            {
+                user.Address = Input.Address;
+                await _userManager.UpdateAsync(user);
+            }
+            var zipCode = user.ZipCode;
+            if (Input.ZipCode != zipCode)
+            {
+                user.ZipCode = Input.ZipCode;
+                await _userManager.UpdateAsync(user);
+            }
+            var firstName = user.FirstName;
+            if (Input.FirstName != firstName)
+            {
+                user.FirstName = Input.FirstName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            var lastName = user.LastName;
+            if (Input.LastName != lastName)
+            {
+                user.LastName = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            }
+
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Ваш профиль успешно обновлен!";
             return RedirectToPage();
         }
     }
