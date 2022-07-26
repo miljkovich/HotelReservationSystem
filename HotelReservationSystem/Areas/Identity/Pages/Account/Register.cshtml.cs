@@ -70,7 +70,7 @@ namespace HotelReservationSystem.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Date)]
             [Display(Name = "Дата рождения")]
-            public DateOnly BirthDate { get; set; }
+            public DateTime BirthDate { get; set; }
 
             [Required]
             [Display(Name = "Национальность")]
