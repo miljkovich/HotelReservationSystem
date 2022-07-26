@@ -20,3 +20,25 @@ body {
 body, h1, h2, h3, h4, h5, h6 {
     font-family: "Raleway", Arial, Helvetica, sans-serif
 }
+
+.nav-pills .nav-link.active {
+    background-color: #f44336 !important;
+    color: white;
+}
+.btn-primary {
+    background-color: #f44336 !important;
+    color: #fff!important;
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-primary:hover {
+    color: #000 !important;
+    background-color: #ccc !important;
+}
