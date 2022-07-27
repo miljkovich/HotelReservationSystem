@@ -6,10 +6,10 @@
 @if (SignInManager.IsSignedIn(User))
 {
 
-        @if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
+        @*@if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
         {
             <img class="w3-bar-item w3-mobile w3-right" style="width:30px;height:30px; object-fit:cover; border-radius:30px" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))">
-        }
+        }*@
     <a class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?.Name</a>
 @*    <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
