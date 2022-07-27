@@ -57,7 +57,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Price,Capacity,Description,RoomArea,RoomImageURL")] RoomType roomType)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Capacity,Description,RoomArea,RoomImageURL")] RoomType roomType)
         {
             if (ModelState.IsValid)
             {
