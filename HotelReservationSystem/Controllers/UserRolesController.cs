@@ -1,4 +1,5 @@
 ﻿using HotelReservationSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +37,7 @@ namespace HotelReservationSystem.Controllers
             return new List<string>(await _userManager.GetRolesAsync(user));
         }
 
-
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Manage(string userId)
         {
             ViewBag.userId = userId;
@@ -68,6 +69,7 @@ namespace HotelReservationSystem.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
