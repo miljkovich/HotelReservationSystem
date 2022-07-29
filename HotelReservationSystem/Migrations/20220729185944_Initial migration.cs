@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HotelReservationSystem.Migrations
 {
-    public partial class firstmigration : Migration
+    public partial class Initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -110,12 +110,12 @@ namespace HotelReservationSystem.Migrations
                 schema: "Identity",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    RoomNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoomTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rooms", x => x.Id);
+                    table.PrimaryKey("PK_Rooms", x => x.RoomNumber);
                     table.ForeignKey(
                         name: "FK_Rooms_RoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,
@@ -228,6 +228,7 @@ namespace HotelReservationSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoomId = table.Column<int>(type: "int", nullable: false),
+                    RoomNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DateIn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateOut = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -235,11 +236,11 @@ namespace HotelReservationSystem.Migrations
                 {
                     table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservations_Rooms_RoomId",
-                        column: x => x.RoomId,
+                        name: "FK_Reservations_Rooms_RoomNumber",
+                        column: x => x.RoomNumber,
                         principalSchema: "Identity",
                         principalTable: "Rooms",
-                        principalColumn: "Id",
+                        principalColumn: "RoomNumber",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reservations_User_ApplicationUserId",
@@ -257,10 +258,10 @@ namespace HotelReservationSystem.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_RoomId",
+                name: "IX_Reservations_RoomNumber",
                 schema: "Identity",
                 table: "Reservations",
-                column: "RoomId");
+                column: "RoomNumber");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
