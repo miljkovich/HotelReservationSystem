@@ -141,17 +141,12 @@ namespace HotelReservationSystem.Migrations
                     b.Property<DateTime>("DateOut")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("Room1Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("Room1Id");
 
                     b.HasIndex("RoomId");
 
@@ -161,10 +156,7 @@ namespace HotelReservationSystem.Migrations
             modelBuilder.Entity("HotelReservationSystem.Models.Room", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("RoomTypeId")
                         .HasColumnType("int");
@@ -174,21 +166,6 @@ namespace HotelReservationSystem.Migrations
                     b.HasIndex("RoomTypeId");
 
                     b.ToTable("Rooms", "Identity");
-                });
-
-            modelBuilder.Entity("HotelReservationSystem.Models.Room1", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoomTypeId");
-
-                    b.ToTable("Rooms1", "Identity");
                 });
 
             modelBuilder.Entity("HotelReservationSystem.Models.RoomType", b =>
@@ -364,10 +341,6 @@ namespace HotelReservationSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelReservationSystem.Models.Room1", null)
-                        .WithMany("Reservations")
-                        .HasForeignKey("Room1Id");
-
                     b.HasOne("HotelReservationSystem.Models.Room", "Room")
                         .WithMany("Reservations")
                         .HasForeignKey("RoomId")
@@ -383,17 +356,6 @@ namespace HotelReservationSystem.Migrations
                 {
                     b.HasOne("HotelReservationSystem.Models.RoomType", "RoomType")
                         .WithMany("Rooms")
-                        .HasForeignKey("RoomTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RoomType");
-                });
-
-            modelBuilder.Entity("HotelReservationSystem.Models.Room1", b =>
-                {
-                    b.HasOne("HotelReservationSystem.Models.RoomType", "RoomType")
-                        .WithMany()
                         .HasForeignKey("RoomTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -458,11 +420,6 @@ namespace HotelReservationSystem.Migrations
                 });
 
             modelBuilder.Entity("HotelReservationSystem.Models.Room", b =>
-                {
-                    b.Navigation("Reservations");
-                });
-
-            modelBuilder.Entity("HotelReservationSystem.Models.Room1", b =>
                 {
                     b.Navigation("Reservations");
                 });
