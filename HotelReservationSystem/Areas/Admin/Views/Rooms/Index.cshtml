@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.RoomNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RoomType.Name)
+                <a asp-area="Admin" asp-controller="RoomTypes" asp-action="Details" asp-route-id=@item.RoomTypeId>@Html.DisplayFor(modelItem => item.RoomType.Name)</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.RoomNumber">Edit</a> |
@@ -36,6 +36,7 @@
                 <a asp-action="Delete" asp-route-id="@item.RoomNumber">Delete</a>
             </td>
         </tr>
+
 }
     </tbody>
 </table>
