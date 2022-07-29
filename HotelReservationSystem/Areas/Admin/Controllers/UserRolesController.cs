@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace HotelReservationSystem.Controllers
+namespace HotelReservationSystem.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = "SuperAdmin")]
     public class UserRolesController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -37,7 +39,6 @@ namespace HotelReservationSystem.Controllers
             return new List<string>(await _userManager.GetRolesAsync(user));
         }
 
-        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Manage(string userId)
         {
             ViewBag.userId = userId;
