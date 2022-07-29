@@ -28,7 +28,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         }
 
         // GET: Admin/Rooms/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.Rooms == null)
             {
@@ -37,7 +37,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
 
             var room = await _context.Rooms
                 .Include(r => r.RoomType)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.RoomNumber == id);
             if (room == null)
             {
                 return NotFound();
@@ -58,7 +58,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RoomTypeId")] Room room)
+        public async Task<IActionResult> Create([Bind("RoomNumber,RoomTypeId")] Room room)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         }
 
         // GET: Admin/Rooms/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Rooms == null)
             {
@@ -92,9 +92,9 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RoomTypeId")] Room room)
+        public async Task<IActionResult> Edit(string id, [Bind("RoomNumber,RoomTypeId")] Room room)
         {
-            if (id != room.Id)
+            if (id != room.RoomNumber)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoomExists(room.Id))
+                    if (!RoomExists(room.RoomNumber))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         }
 
         // GET: Admin/Rooms/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Rooms == null)
             {
@@ -133,7 +133,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
 
             var room = await _context.Rooms
                 .Include(r => r.RoomType)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.RoomNumber == id);
             if (room == null)
             {
                 return NotFound();
@@ -145,7 +145,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // POST: Admin/Rooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Rooms == null)
             {
@@ -161,9 +161,9 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RoomExists(int id)
+        private bool RoomExists(string id)
         {
-          return (_context.Rooms?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Rooms?.Any(e => e.RoomNumber == id)).GetValueOrDefault();
         }
     }
 }
