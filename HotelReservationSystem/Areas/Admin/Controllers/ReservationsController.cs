@@ -50,7 +50,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // GET: Admin/Reservations/Create
         public IActionResult Create()
         {
-            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "FullName");
             ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Id");
             return View();
         }
