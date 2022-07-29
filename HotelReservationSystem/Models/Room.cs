@@ -1,7 +1,10 @@
-﻿namespace HotelReservationSystem.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HotelReservationSystem.Models
 {
     public class Room
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public int RoomTypeId { get; set; }
         public RoomType RoomType { get; set; } = null!;
