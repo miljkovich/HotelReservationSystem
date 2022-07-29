@@ -30,9 +30,18 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
                 <div class="navbar-nav topnav-centered">
                     <a class="nav-item nav-link active" asp-area="Admin" asp-controller="RoomTypes" asp-action="Index">Типы Номеров</a>
-@*                    <a href="#" class="nav-item nav-link">Profile</a>
+@*                   <a href="#" class="nav-item nav-link">Profile</a>
                     <a href="#" class="nav-item nav-link">Messages</a>
                     <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>*@
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Роли
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Добавить роли</a></li>
+                        <li><a class="dropdown-item" href="#">Назначить роли</a></li>
+                      </ul>
+                    </li>
                 </div>
                 <div class="navbar-nav ms-auto">
                     <a href="#" class="nav-item nav-link">Login</a>
