@@ -14,7 +14,8 @@ namespace HotelReservationSystem.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-
+        public DbSet<Room1> Rooms1 { get; set; }
+ 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
