@@ -6,6 +6,7 @@ namespace HotelReservationSystem.Models
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
+        public string FullName { get { return FirstName + " " + LastName; } }
         public DateTime BirthDate { get; set; }
         public String Nationality { get; set; } = null!;
         public String Passport { get; set; } = null!;
