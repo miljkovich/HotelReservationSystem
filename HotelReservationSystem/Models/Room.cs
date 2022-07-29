@@ -13,6 +13,7 @@ namespace HotelReservationSystem.Models
         [Display(Name = "Тип Номера")]
 
         public int RoomTypeId { get; set; }
+        [Display(Name = "Тип Номера")]
         public RoomType? RoomType { get; set; }
         [Display(Name = "Резервации")]
         public ICollection<Reservation> ?Reservations { get; set; }
