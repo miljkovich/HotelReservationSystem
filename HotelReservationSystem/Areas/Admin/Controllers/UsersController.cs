@@ -15,7 +15,6 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
             _context = context;
         }
         // GET: Admin/Users
-
         public async Task<IActionResult> Index()
         {
             return _context.Users != null ?
@@ -23,5 +22,24 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
                 Problem("Entity set 'ApplicationDbContext.Users'  is null.");
         }
 
+        //GET: Admin/Users/Details/<user_id>
+        public async Task<IActionResult> Details(string? id)
+        {
+            if (id == null || _context.Users == null)
+            {
+                return NotFound();
+            }    
+
+            var user = await _context.Users
+                .Include(u => u.Reservations)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Id == id);
+            if (user==null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
     }
 }

@@ -1,0 +1,107 @@
+﻿@model HotelReservationSystem.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Детали пользователя";
+}
+
+<h1> @ViewData["Title"] </h1>
+
+<div>
+    <h4>Пользователь</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nationality)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Passport)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Passport)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Reservations)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.Reservations == null)
+            {
+                    @: Нет резерваций
+            }
+            else
+            {
+            <table class="table">
+            <thead>
+                <tr>
+                    <th> Ид Резервации</th>
+                    <th> Номер </th>
+                    <th> Дата заселение </th>
+                    <th> Дата выселения</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model.Reservations)
+                {
+                    <td>@reservation.Id</td>
+                    <td>@reservation.RoomNumber</td>
+                    <td>@reservation.DateIn</td>
+                    <td>@reservation.DateOut</td>
+               
+                    <td>  <a asp-controller="Reservations" asp-action="Details" asp-route-id="@reservation.Id">Детали резервации</a></td>
+                }
+            </tbody>
+            </table>
+
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            Фото Профиля
+        </dt>
+        <dd class = "col-sm-10">
+            <img src=@Html.DisplayFor(model => model.ProfilePicture)/>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Изменить</a> |
+    <a asp-action="Index">Вернуться</a>
+</div>
