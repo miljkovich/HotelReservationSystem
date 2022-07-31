@@ -8,11 +8,11 @@ namespace HotelReservationSystem.Models
         [Display(Name = "Пользователь Id")]
         public string ApplicationUserId { get; set; } = null!;
         [Display(Name = "Пользователь")]
-        public ApplicationUser ApplicationUser { get; set; } = null!;
+        public ApplicationUser ?ApplicationUser { get; set; }
         [Display(Name = "Номер Id")]
-        public int RoomId { get; set; }
+        public string RoomNumber { get; set; } = null!;
         [Display(Name = "Номер")]
-        public Room Room { get; set; } = null!;
+        public Room ?Room { get; set; }
         [Display(Name = "Дата заселения")]
         public DateTime DateIn { get; set; }
         [Display(Name = "Дата выселения")]
