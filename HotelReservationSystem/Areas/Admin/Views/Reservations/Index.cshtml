@@ -13,8 +13,12 @@
     <thead>
         <tr>
             <th>
+                Имя пользователя
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ApplicationUser)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.RoomNumber)
             </th>
@@ -30,6 +34,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.FullName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
             </td>

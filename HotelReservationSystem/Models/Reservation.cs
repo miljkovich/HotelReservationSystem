@@ -7,7 +7,7 @@ namespace HotelReservationSystem.Models
         public int Id { get; set; }
         [Display(Name = "Пользователь Id")]
         public string ApplicationUserId { get; set; } = null!;
-        [Display(Name = "Пользователь")]
+        [Display(Name = "Пользователь Id")]
         public ApplicationUser ?ApplicationUser { get; set; }
         [Display(Name = "Номер Id")]
         public string RoomNumber { get; set; } = null!;
