@@ -23,7 +23,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // GET: Admin/Reservations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Reservations.Include(r => r.ApplicationUser).Include(r => r.Room);
+            var applicationDbContext = _context.Reservations.Include(r => r.ApplicationUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,7 +37,6 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
 
             var reservation = await _context.Reservations
                 .Include(r => r.ApplicationUser)
-                .Include(r => r.Room)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservation == null)
             {
@@ -51,7 +50,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "FullName");
-            ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Id");
+            ViewData["RoomNumber"] = new SelectList(_context.Rooms, "RoomNumber", "RoomNumber");
             return View();
         }
 
@@ -60,8 +59,12 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ApplicationUserId,RoomId,DateIn,DateOut")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("Id,ApplicationUserId,RoomNumber,DateIn,DateOut")] Reservation reservation)
         {
+            var errors = ModelState
+            .Where(x => x.Value.Errors.Count > 0)
+            .Select(x => new { x.Key, x.Value.Errors })
+            .ToArray();
             if (ModelState.IsValid)
             {
                 _context.Add(reservation);
@@ -69,7 +72,6 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", reservation.ApplicationUserId);
-            ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Id", reservation.RoomId);
             return View(reservation);
         }
 
@@ -87,7 +89,6 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
                 return NotFound();
             }
             ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", reservation.ApplicationUserId);
-            ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Id", reservation.RoomId);
             return View(reservation);
         }
 
@@ -96,7 +97,7 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ApplicationUserId,RoomId,DateIn,DateOut")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ApplicationUserId,RoomNumber,DateIn,DateOut")] Reservation reservation)
         {
             if (id != reservation.Id)
             {
@@ -124,7 +125,6 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", reservation.ApplicationUserId);
-            ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Id", reservation.RoomId);
             return View(reservation);
         }
 
@@ -138,7 +138,6 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
 
             var reservation = await _context.Reservations
                 .Include(r => r.ApplicationUser)
-                .Include(r => r.Room)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservation == null)
             {
