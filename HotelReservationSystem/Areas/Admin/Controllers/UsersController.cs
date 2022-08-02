@@ -1,4 +1,5 @@
 ﻿using HotelReservationSystem.Data;
+using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,61 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
 
             return View(user);
         }
-        
+
+        // GET: Admin/RoomTypes/Edit/(string)user_id
+        public async Task<IActionResult> Edit(string? id)
+        {
+            if (id == null || _context.Users == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Admin/Users/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id,
+            [Bind("Id,FirstName,LastName,BirthDate,Nationality," +
+            "Passport,City,Address,ZipCode,ProfilePicture")] ApplicationUser user)
+        {
+            if (id != user.Id)
+            {
+                return NotFound();
+            }
+            var errors = ModelState
+                .Where(x => x.Value.Errors.Count > 0)
+                .Select(x => new { x.Key, x.Value.Errors })
+                .ToArray();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(user);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(user.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(user);
+        }
+
         //GET: Admin/Users/Delete/(string)id
         public async Task<IActionResult> Delete(string? id)
         {
@@ -77,6 +132,10 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        private bool UserExists(string id)
+        {
+            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
