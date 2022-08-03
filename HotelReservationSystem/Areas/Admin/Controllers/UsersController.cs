@@ -1,6 +1,8 @@
-﻿using HotelReservationSystem.Data;
+﻿using HotelReservationSystem.Areas.Admin.Models;
+using HotelReservationSystem.Data;
 using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +12,14 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context,
+             UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         // GET: Admin/Users
         public async Task<IActionResult> Index()
@@ -56,17 +62,35 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(user);
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                BirthDate = user.BirthDate,
+                Nationality = user.Nationality,
+                Passport = user.Passport,
+                City = user.City,
+                Address = user.Address,
+                ZipCode = user.ZipCode,
+                Roles = userRoles,
+            };
+            return View(model);
+
         }
 
         // POST: Admin/Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id,
+        public async Task<IActionResult> Edit(
             [Bind("Id,FirstName,LastName,BirthDate,Nationality," +
-            "Passport,City,Address,ZipCode,ProfilePicture")] ApplicationUser user)
+            "Passport,City,Address,ZipCode,ProfilePicture")] EditUserViewModel model)
         {
-            if (id != user.Id)
+            var user = await _userManager.FindByIdAsync(model.Id);
+            if (user == null)
             {
                 return NotFound();
             }
@@ -76,23 +100,28 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
                 .ToArray();
             if (ModelState.IsValid)
             {
-                try
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.BirthDate = model.BirthDate;
+                user.Nationality = model.Nationality;
+                user.Passport = model.Passport;
+                user.City = model.City;
+                user.Address = model.Address;
+                user.ZipCode = model.ZipCode;
+                user.ProfilePicture = model.ProfilePicture;
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
                 }
-                catch (DbUpdateConcurrencyException)
+                foreach(var error in result.Errors)
                 {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("", error.Description);
                 }
-                return RedirectToAction(nameof(Index));
+
             }
             return View(user);
         }

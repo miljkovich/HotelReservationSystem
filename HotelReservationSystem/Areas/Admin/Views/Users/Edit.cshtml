@@ -1,4 +1,5 @@
-﻿@model HotelReservationSystem.Models.ApplicationUser
+﻿@using HotelReservationSystem.Areas.Admin.Models
+@model EditUserViewModel
 @{
     ViewData["Title"] = "Изменить пользователя";
 }
@@ -11,7 +12,8 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" disabled class="form-control"/>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
