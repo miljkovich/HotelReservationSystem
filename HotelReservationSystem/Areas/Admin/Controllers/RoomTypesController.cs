@@ -89,13 +89,16 @@ namespace HotelReservationSystem.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Price,Capacity,Description,RoomArea,RoomImageURL")] RoomType roomType)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,AdultsCapacity,KidsCapacity,Description,RoomArea,RoomImageURL")] RoomType roomType)
         {
             if (id != roomType.Id)
             {
                 return NotFound();
             }
-
+            var errors = ModelState
+                .Where(x => x.Value.Errors.Count > 0)
+                .Select(x => new { x.Key, x.Value.Errors })
+                .ToArray();
             if (ModelState.IsValid)
             {
                 try
