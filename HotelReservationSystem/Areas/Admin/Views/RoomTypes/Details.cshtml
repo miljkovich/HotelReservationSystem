@@ -53,6 +53,24 @@
 
             <img src=@Html.DisplayFor(model => model.RoomImageURL) />
         </dd>
+        <p class="w3-large">
+            @if (Model.HasBath)
+                {
+                    <i class="fa fa-bath"></i> 
+                }
+            @if (Model.HasPhone)
+                {
+                    <i class="fa fa-phone"></i> 
+                }
+            @if (Model.HasTV)
+                {
+                    <i class="fa fa-tv"></i> 
+                }
+            @if (Model.HasWiFi)
+                {
+                    <i class="fa fa-wifi"></i> 
+                }
+        </p>
     </dl>
 </div>
 <div>
