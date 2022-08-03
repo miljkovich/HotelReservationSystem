@@ -50,7 +50,24 @@
         <h6 class="w3-opacity">От ₽@obj.Price</h6>
         <p>Single bed</p>
         <p>@obj.RoomArea m<sup>2</sup></p>
-        <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+        <p class="w3-large">
+            @if (obj.HasBath)
+                {
+                    <i class="fa fa-bath"></i> 
+                }
+            @if (obj.HasPhone)
+                {
+                    <i class="fa fa-phone"></i> 
+                }
+            @if (obj.HasTV)
+                {
+                    <i class="fa fa-tv"></i> 
+                }
+            @if (obj.HasWiFi)
+                {
+                    <i class="fa fa-wifi"></i> 
+                }
+
         <button class="w3-button w3-block w3-black w3-margin-bottom">Выбрать номер</button>
         </div>
     </div>
