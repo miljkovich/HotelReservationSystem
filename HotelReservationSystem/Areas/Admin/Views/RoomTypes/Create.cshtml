@@ -48,6 +48,26 @@
                 <span asp-validation-for="RoomImageURL" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="HasBath"></label>
+                <i class="fa fa-bath"></i>
+                <input type="checkbox" asp-for="HasBath" />
+            </div>
+            <div class="form-group">
+                <label asp-for="HasPhone"></label>
+                <i class="fa fa-phone"></i>
+                <input type="checkbox" asp-for="HasPhone" />
+            </div>
+            <div class="form-group">
+                <label asp-for="HasTV"></label>
+                <i class="fa fa-television"></i>
+                <input type="checkbox" asp-for="HasTV" />
+            </div>
+            <div class="form-group">
+                <label asp-for="HasWiFi"></label>
+                <i class="fa fa-wifi"></i>
+                <input type="checkbox" asp-for="HasWiFi" />
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Создать" class="btn btn-primary" />
             </div>
         </form>
