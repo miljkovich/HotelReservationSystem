@@ -49,6 +49,34 @@
                 <span asp-validation-for="RoomImageURL" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="HasBath">
+                    @Html.DisplayNameFor(model => model.HasBath)
+                    <i class="fa fa-bath"></i>
+                    @Html.CheckBox("HasBath")
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="HasPhone">
+                    @Html.DisplayNameFor(model => model.HasPhone)
+                    <i class="fa fa-phone"></i>
+                    @Html.CheckBox("HasPhone")
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="HasTV">
+                    @Html.DisplayNameFor(model => model.HasTV)
+                    <i class="fa fa-television"></i>
+                    @Html.CheckBox("HasTV")
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="HasWiFi">
+                    @Html.DisplayNameFor(model => model.HasWiFi)
+                    <i class="fa fa-wifi"></i>
+                    @Html.CheckBox("HasWiFi")
+                </label>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
