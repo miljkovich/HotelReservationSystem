@@ -25,13 +25,13 @@ namespace HotelReservationSystem.Models
         [Display(Name = "Фото URL")]
         public string? RoomImageURL { get; set; }
         [Display(Name = "Имеет ванную")]
-        public bool hasBath { get; set; }
+        public bool HasBath { get; set; }
         [Display(Name = "Имеет телефон")]
-        public bool hasPhone { get; set; }
+        public bool HasPhone { get; set; }
         [Display(Name = "Имеет Wi-Fi")]
-        public bool hasWiFi { get; set; }
+        public bool HasWiFi { get; set; }
         [Display(Name = "Имеет Телевизор")]
-        public bool hasTV { get; set; }
+        public bool HasTV { get; set; }
         public ICollection<Room>? Rooms { get; set; }
 
     }
