@@ -69,7 +69,7 @@
                 }
         </p>
 
-        <button class="w3-button w3-block w3-black w3-margin-bottom">Выбрать номер</button>
+        <button type="button" onclick="location.href='@Url.Action("Create", "Reservation", new {id = obj.Id})'" class="w3-button w3-block w3-black w3-margin-bottom">Выбрать номер</button>
         </div>
     </div>
 }
