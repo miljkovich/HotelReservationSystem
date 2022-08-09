@@ -17,7 +17,8 @@ namespace HotelReservationSystem.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<RoomType> objRoomTypeList = _db.RoomTypes.ToList();
+            return View(objRoomTypeList);
         }
 
         public async Task<IActionResult> Create(int? id)
