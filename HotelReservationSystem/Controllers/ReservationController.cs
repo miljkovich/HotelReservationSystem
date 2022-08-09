@@ -38,11 +38,12 @@ namespace HotelReservationSystem.Controllers
                 KidsCapacity = RoomTypeModel.KidsCapacity,
                 RoomTypeDescription = RoomTypeModel.Description,
                 RoomTypeImageUrl = RoomTypeModel.RoomImageURL,
+                DateIn = DateTime.Now,
+                DateOut = DateTime.Now.AddDays(1),
                 AdultsIn = 0,
                 KidsIn = 0,
             };
             return View(ViewModel);
-
         }
     }
 }
