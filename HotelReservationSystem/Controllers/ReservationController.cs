@@ -62,10 +62,10 @@ namespace HotelReservationSystem.Controllers
             }
             var User = await _userManager.GetUserAsync(HttpContext.User);
             var availRooms = _db.Rooms.Where(
-                room => room.RoomTypeId == model.RoomTypeId).ToList();
-                //&&
-                //(!room.Reservations.Any(b => (b.DateOut >= model.DateOut && b.DateIn<= model.DateIn))))
-                //.ToList();
+                room => room.RoomTypeId == model.RoomTypeId
+            &&
+            (!room.Reservations.Any(b => (b.DateOut >= model.DateOut && b.DateIn <= model.DateIn))))
+            .ToList();
 
             return null;
         }
