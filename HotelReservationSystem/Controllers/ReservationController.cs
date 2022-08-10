@@ -30,7 +30,7 @@ namespace HotelReservationSystem.Controllers
             if (id == null)
                 return NotFound();
 
-            var RoomTypeModel =  _db.RoomTypes.FirstOrDefault(r => r.Id == id);
+            var RoomTypeModel = _db.RoomTypes.FirstOrDefault(r => r.Id == id);
             if (RoomTypeModel == null)
             {
                 return NotFound();
@@ -61,13 +61,16 @@ namespace HotelReservationSystem.Controllers
                 return View(model);
             }
             var User = await _userManager.GetUserAsync(HttpContext.User);
-            var availRooms = _db.Rooms.Where(
+            var availabaleRooms = _db.Rooms.Where(
                 room => room.RoomTypeId == model.RoomTypeId
-            &&
-            (!room.Reservations.Any(b => (b.DateOut >= model.DateOut && b.DateIn <= model.DateIn))))
-            .ToList();
+                &&
+                (!room.Reservations.Any(
+                    res => ((res.DateIn >= model.DateIn && res.DateIn <= model.DateOut)
+                            || (res.DateOut > model.DateIn && res.DateOut <= model.DateOut)
+                            || (res.DateIn > model.DateIn && res.DateOut <= model.DateOut))))
+                ).ToList();
 
-            return null;
+            return View(model);
         }
 
         private bool InputDatesValid(DateTime checkIn, DateTime checkOut)
