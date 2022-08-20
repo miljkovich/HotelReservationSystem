@@ -61,16 +61,29 @@ namespace HotelReservationSystem.Controllers
                 return View(model);
             }
             var User = await _userManager.GetUserAsync(HttpContext.User);
-            var availabaleRooms = _db.Rooms.Where(
-                room => room.RoomTypeId == model.RoomTypeId
-                &&
-                (!room.Reservations.Any(
-                    res => ((res.DateIn >= model.DateIn && res.DateIn <= model.DateOut)
-                            || (res.DateOut > model.DateIn && res.DateOut <= model.DateOut)
-                            || (res.DateIn > model.DateIn && res.DateOut <= model.DateOut))))
-                ).ToList();
+            var availabaleRooms = GetAvailabaleRooms(model);
 
+            if (availabaleRooms.Count == 0)
+                ModelState.AddModelError("NoFreeRoomError", $"К сожалению нет доступных номеров в период с: '{model.DateIn.ToString("dd/MM/yyyy")}' по: '{model.DateOut.ToString("dd/MM/yyyy")}'.");
+            else
+            {
+                Reservation reservation = new Reservation(User.Id, availabaleRooms[0].RoomNumber, model.DateIn, model.DateOut, GetReservationPrice(model));
+                _db.Add(reservation);
+                await _db.SaveChangesAsync();
+                return View("SuccessfullyCreated", reservation);
+            }
+            
             return View(model);
+        }
+
+        public async Task<IActionResult> MyReservations()
+        {
+            var User = await _userManager.GetUserAsync(HttpContext.User);
+
+
+            IEnumerable<Reservation> model = User.Reservations.ToList();
+            return View(model);
+
         }
 
         private bool InputDatesValid(DateTime checkIn, DateTime checkOut)
@@ -80,12 +93,25 @@ namespace HotelReservationSystem.Controllers
             return true;
         }
 
-        public async Task<IActionResult> MyReservations()
+        private float GetReservationPrice(RoomTypeReservationViewModel model)
         {
-            var User = await _userManager.GetUserAsync(HttpContext.User);
-            List<Reservation> model = User.Reservations.ToList();
+            int totalDays = (int)Math.Round((model.DateOut - model.DateIn).TotalDays);
+            float priceForDay = _db.RoomTypes.Find(model.RoomTypeId).Price;
+            return totalDays * priceForDay;
 
-            return View(model);
         }
+
+        private List<Room> GetAvailabaleRooms(RoomTypeReservationViewModel model)
+        {
+            return _db.Rooms.Where(
+                room => room.RoomTypeId == model.RoomTypeId
+                &&
+                (!room.Reservations.Any(
+                    res => ((res.DateIn >= model.DateIn && res.DateIn <= model.DateOut)
+                            || (res.DateOut > model.DateIn && res.DateOut <= model.DateOut)
+                            || (res.DateIn > model.DateIn && res.DateOut <= model.DateOut))))
+                ).ToList();
+        }
+
     }
 }
