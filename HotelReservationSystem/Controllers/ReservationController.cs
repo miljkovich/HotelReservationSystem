@@ -79,5 +79,13 @@ namespace HotelReservationSystem.Controllers
                 return false;
             return true;
         }
+
+        public async Task<IActionResult> MyReservations()
+        {
+            var User = await _userManager.GetUserAsync(HttpContext.User);
+            List<Reservation> model = User.Reservations.ToList();
+
+            return View(model);
+        }
     }
 }
