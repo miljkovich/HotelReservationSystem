@@ -27,5 +27,16 @@ namespace HotelReservationSystem.Models
         [Display(Name = "Дата выселения")]
         public DateTime DateOut { get; set; }
 
+        [Display(Name = "Цена")]
+        public float Price { get; set; }
+
+        public Reservation(string applicationUserId, string roomNumber, DateTime dateIn, DateTime dateOut, float price)
+        {
+            ApplicationUserId = applicationUserId;
+            RoomNumber = roomNumber;
+            DateIn = dateIn;
+            DateOut = dateOut;
+            Price = price;
+        }
     }
 }
