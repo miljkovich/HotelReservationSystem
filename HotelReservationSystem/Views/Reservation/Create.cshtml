@@ -44,11 +44,16 @@
                 </div>
                 @if (!ViewData.ModelState.IsValid)
                 {
-                    <div>@Html.ValidationMessage("DateError")</div>
+                            var errors = ViewData.ModelState.Values.SelectMany(v => v.Errors);
+                            foreach (var error in errors)
+                            {
+                                <div class="alert alert-danger">@error.ErrorMessage</div>
+                            }
                 }
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg w3-red w3-button">Создать резервацию</button>
                 </div>
+                        
             </form>
         </section>
     </div>
