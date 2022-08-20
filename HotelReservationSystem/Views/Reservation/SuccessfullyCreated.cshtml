@@ -1,0 +1,18 @@
+﻿@model Reservation
+
+<h1 class="alert alert-success"> Вы успешно забронировали номер! </h1>
+<br />
+<dt class="col-sm-2">Номер резервации: </dt>
+<dd class="col-sm-10">@Model.Id</dd>
+<dt class="col-sm-2">Дата заселения: </dt>
+<dd class="col-sm-10">@Model.DateIn.ToString("dd/MM/yyyy") </dd>
+<dt class="col-sm-2">Дата Выселения: </dt>
+<dd class="col-sm-10">@Model.DateOut.ToString("dd/MM/yyyy") </dd>
+<dt class="col-sm-2">Цена: </dt>
+<dd class="col-sm-10">@Model.Price </dd>
+<br />
+<a class="btn btn-info w-80 float" asp-action="MyReservations">Мои резервации</a>
+<a class="btn btn-primary w-80 float" asp-action="Index">Новая резервация</a>
+<a class="btn btn-light w-80 float" asp-area="" asp-controller="Home" asp-action="Index">Назад</a>
+
+
