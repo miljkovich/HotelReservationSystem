@@ -79,11 +79,25 @@ namespace HotelReservationSystem.Controllers
         public async Task<IActionResult> MyReservations()
         {
             var User = await _userManager.GetUserAsync(HttpContext.User);
-            IEnumerable<Reservation> model = await _db.Reservations.Where(r => r.ApplicationUserId == User.Id).ToListAsync();
-            if (model == null)
-                return View(new List<Reservation> { });
-            return View(model);
+            IEnumerable<Reservation> allReservations = await _db.Reservations.Where(r => r.ApplicationUserId == User.Id).Include(r => r.Room).ThenInclude(r => r.RoomType).ToListAsync();
+            IEnumerable<MyReservationsVM> model = new List<MyReservationsVM>();
 
+            foreach (Reservation r in allReservations)
+            {
+                var modelItem = new MyReservationsVM
+                {
+                    Id = r.Id,
+                    ApplicationUserId = r.ApplicationUserId,
+                    RoomNumber = r.RoomNumber,
+                    RoomTypeName = r.Room.RoomType.Name,
+                    DateIn = r.DateIn,
+                    DateOut = r.DateOut,
+                    Price = r.Price,
+                };
+                model = model.Append(modelItem);
+            }
+
+            return View(model);
         }
 
         private bool InputDatesValid(DateTime checkIn, DateTime checkOut)

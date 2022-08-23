@@ -1,4 +1,41 @@
-﻿@model Reservation  
+﻿@model IEnumerable<MyReservationsVM> 
 @{
+
 }
+
+<h1>Ваши резервации:</h1>
+<hr/>
+@if (Model.Count() == 0)
+{
+    <p class="alert alert-dark"> У Вас пока нет резерваций.</p>
+    <a class="btn btn-primary" asp-controller="Reservation" asp-action="Index"> Создать новую резервацию. </a>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Тип Номера</th>
+            <th>Дата заселения</th>
+            <th>Дата выселения</th>
+            <th>Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (MyReservationsVM r in Model)
+    {
+        <tr>
+            <td>@r.RoomTypeName</td>
+            <td>@r.DateIn.ToString("dd/MM/yyyy")</td>
+            <td>@r.DateOut.ToString("dd/MM/yyyy")</td>
+            <td>@r.Price ₽</td>
+            <td>
+                <a class="btn btn-primary" href="#">Детали</a>
+            </td>
+        </tr>     
+    }
+
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-controller="Reservation" asp-action="Index"> Создать новую резервацию. </a>
 
