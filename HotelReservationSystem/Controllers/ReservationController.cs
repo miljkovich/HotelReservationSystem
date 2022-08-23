@@ -93,6 +93,7 @@ namespace HotelReservationSystem.Controllers
                     DateIn = r.DateIn,
                     DateOut = r.DateOut,
                     Price = r.Price,
+                    Paid = r.Paid,
                 };
                 model = model.Append(modelItem);
             }

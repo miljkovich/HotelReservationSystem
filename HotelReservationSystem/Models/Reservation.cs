@@ -30,6 +30,9 @@ namespace HotelReservationSystem.Models
         [Display(Name = "Цена")]
         public float Price { get; set; }
 
+        [Display(Name = "Оплачено")]
+        public bool Paid { get; set; } = false;
+
         public Reservation(string applicationUserId, string roomNumber, DateTime dateIn, DateTime dateOut, float price)
         {
             ApplicationUserId = applicationUserId;

@@ -10,5 +10,6 @@
         public DateTime DateIn { get; set; }
         public DateTime DateOut { get; set; }
         public float Price { get; set; }
+        public bool Paid { get; set;  }
     }
 }
