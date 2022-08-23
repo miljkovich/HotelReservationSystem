@@ -79,9 +79,9 @@ namespace HotelReservationSystem.Controllers
         public async Task<IActionResult> MyReservations()
         {
             var User = await _userManager.GetUserAsync(HttpContext.User);
-
-
-            IEnumerable<Reservation> model = User.Reservations.ToList();
+            IEnumerable<Reservation> model = await _db.Reservations.Where(r => r.ApplicationUserId == User.Id).ToListAsync();
+            if (model == null)
+                return View(new List<Reservation> { });
             return View(model);
 
         }
