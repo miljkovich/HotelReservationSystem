@@ -11,7 +11,7 @@
 <dt class="col-sm-2">Цена: </dt>
 <dd class="col-sm-10">@Model.Price </dd>
 <br />
-<a class="btn btn-info w-80 float" asp-action="MyReservations">Мои резервации</a>
+<a class="btn btn-info w-80 float" asp-area="" asp-controller="Reservation" asp-action="MyReservations">Мои резервации</a>
 <a class="btn btn-primary w-80 float" asp-action="Index">Новая резервация</a>
 <a class="btn btn-light w-80 float" asp-area="" asp-controller="Home" asp-action="Index">Назад</a>
 
