@@ -102,7 +102,7 @@ namespace HotelReservationSystem.Controllers
         }
         public async Task<IActionResult> Details(int id)
         {
-            var reservation = await _db.Reservations.Where(r => r.Id == id).Include(r => r.Room).ThenInclude(r => r.RoomType).SingleOrDefaultAsync();
+            var reservation = await _db.Reservations.Where(r => r.Id == id).Include(r => r.ApplicationUser).Include(r => r.Room).ThenInclude(r => r.RoomType).SingleOrDefaultAsync();
 
             if (reservation == null)
                 return NotFound();

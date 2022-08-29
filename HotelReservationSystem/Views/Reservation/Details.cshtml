@@ -1,7 +1,116 @@
 ﻿@model Reservation
 @{
-    <h1>@Model.Id</h1>
-    <h1>@Model.RoomNumber</h1>
-    <h1>@Model.Room.RoomNumber</h1>
-    <h1>@Model.Room.RoomType.Name</h1>
+    <head>
+        <style>
+            tr td{
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            table h3
+            {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            table {
+                border: 0px;
+                border-collapse: collapse;
+            }
+
+            td {
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+
+
+        </style>
+    </head>
+
+    <div class="container">
+            <table class="table table-bordered ">
+                <tr class="w3-red">
+                    <th class="col-8"> <h3> РЕЗЕРВАЦИЯ: <i class="text-rigth">"@Model.Id"</i>  </h3></th>
+                    <th class="col-4"> <h3 class="text-center"> @Model.Room.RoomType.Name </h3></th>
+                </tr>
+                <tr>
+                    <td class="col-8"> 
+                    <table class="table table-bordered"> 
+                            <tr class="w3-blue">
+                            <th colspan="2"> <h3 > Детали пользователя </h3></th>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4"> Имя: </td>
+                            <td class="col-8"> @Model.ApplicationUser.FirstName<td>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4"> Фамилия: </td>
+                            <td class="col-8">@Model.ApplicationUser.LastName <td>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4">Номер пасспорта: </td>
+                            <td class="col-8">@Model.ApplicationUser.Passport<td>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4">Гражданство: </td>
+                            <td class="col-8"> @Model.ApplicationUser.Nationality<td>
+                            </tr>
+                        </table>
+                        <table class="table table-bordered"> 
+                            <tr class="w3-blue">
+                            <th colspan="2"> <h3 > Детали резервации: </h3></th>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4"> Дата заселения: </td>
+                            <td class="col-8"> @Model.DateIn.ToString("dd.MM.yyyy")<td>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4"> Дата выселения:  </td>
+                            <td class="col-8">@Model.DateIn.ToString("dd.MM.yyyy") <td>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4">Номер: </td>
+                            <td class="col-8">@Model.RoomNumber<td>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4">Цена: </td>
+                            <td class="col-8"> @Model.Price<td>
+                            </tr>
+
+                            <tr>
+                            <td class="col-4">Оплачено: </td>
+                                
+                                    @if (Model.Paid)
+                                        {
+                                         <td class="col-8 text-danger"> НЕТ </td>
+                                        }
+                                    else
+                                    {
+                                         <td class="col-8 text-success"> ДА </td>
+                                    }
+                            </tr>
+                        </table>
+                    </td>     
+                    <td class="col-4"><img src="@Model.Room.RoomType.RoomImageURL" height="334" /></td>
+                </tr>
+            </table>
+                <div class="col-7">
+                                                            
+                </div>
+
+            <div>
+                <a type="button" class="btn btn-primary w-500" asp-area="" asp-controller="Reservation" asp-action="MyReservations" >Назад</a>
+                <button type="button" class="btn btn-success"> Оплатить</button>
+            </div>
+
+
+    </div>
+
 }
