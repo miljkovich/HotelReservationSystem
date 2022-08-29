@@ -41,5 +41,10 @@ namespace HotelReservationSystem.Models
             DateOut = dateOut;
             Price = price;
         }
+
+        public int GetTotalDays()
+        {
+            return (int)Math.Round((DateOut - DateIn).TotalDays);
+        }
     }
 }
