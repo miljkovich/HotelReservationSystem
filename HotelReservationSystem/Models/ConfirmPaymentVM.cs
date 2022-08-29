@@ -4,7 +4,8 @@ namespace HotelReservationSystem.Models
 {
     public class ConfirmPaymentVM
     {
-        Reservation Reservation { get; set; }
+        [Required]
+        public Reservation Reservation { get; set; }
 
         [Required]
         [Display(Name="ФИО")]
@@ -24,6 +25,11 @@ namespace HotelReservationSystem.Models
         [MaxLength(200)]
         [Display(Name = "Город")]
         public string City { get; set; }
+
+        [Required]
+        [MaxLength(10)]
+        [Display(Name = "Почтовый индекс")]
+        public string ZipCode { get; set; }
 
         [Required]
         [Display(Name = "Государство")]
