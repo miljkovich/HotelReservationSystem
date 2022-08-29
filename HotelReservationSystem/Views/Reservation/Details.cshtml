@@ -89,11 +89,11 @@
                                 
                                     @if (Model.Paid)
                                         {
-                                         <td class="col-8 text-danger"> НЕТ </td>
+                                         <td class="col-8 text-success"> ДА </td>
                                         }
                                     else
                                     {
-                                         <td class="col-8 text-success"> ДА </td>
+                                         <td class="col-8 text-danger"> НЕТ </td>
                                     }
                             </tr>
                         </table>
@@ -107,7 +107,10 @@
 
             <div>
                 <a type="button" class="btn btn-primary w-500" asp-area="" asp-controller="Reservation" asp-action="MyReservations" >Назад</a>
+            @if (!Model.Paid)
+            {
                 <button type="button" class="btn btn-success"> Оплатить</button>
+            }
             </div>
 
 
