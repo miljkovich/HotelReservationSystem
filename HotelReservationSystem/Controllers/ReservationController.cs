@@ -100,6 +100,18 @@ namespace HotelReservationSystem.Controllers
 
             return View(model);
         }
+        public async Task<IActionResult> Details(int id)
+        {
+            var reservation = await _db.Reservations.Where(r => r.Id == id).Include(r => r.Room).ThenInclude(r => r.RoomType).SingleOrDefaultAsync();
+
+            if (reservation == null)
+                return NotFound();
+
+            return View(reservation);
+
+
+
+        }
 
         private bool InputDatesValid(DateTime checkIn, DateTime checkOut)
         {
