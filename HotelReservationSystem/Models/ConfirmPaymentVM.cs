@@ -5,6 +5,8 @@ namespace HotelReservationSystem.Models
     public class ConfirmPaymentVM
     {
         [Required]
+        public int ReservationId { get; set; }
+
         public Reservation Reservation { get; set; }
 
         [Required]

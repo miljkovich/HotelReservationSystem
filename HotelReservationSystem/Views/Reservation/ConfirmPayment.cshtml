@@ -56,19 +56,20 @@ body {
 
 input[type=text] {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 3px;
 }
 
 label {
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 0px;
   display: block;
 }
 
 .icon-container {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   padding: 7px 0;
   font-size: 24px;
 }
@@ -128,29 +129,33 @@ span.price {
             <h3>Billing Address</h3>
 
 
-            @Html.HiddenFor(m => m.Reservation, new {Name = "Reservation"});
+           <input type="hidden" asp-for="ReservationId"/>
+
+           <div class="form-group">
+                <label asp-for="FullName"><i class="fa fa-user"></i> ФИО</label>
+                <input asp-for="FullName" type="text" placeholder="John M. Doe">
+                <span asp-validation-for="FullName" class="text-danger"></span>
+           </div>
 
 
-            <label asp-for="FullName"><i class="fa fa-user"></i> ФИО</label>
-            <input asp-for="FullName" type="text" placeholder="John M. Doe">
-            <span asp-validation-for="FullName" class="text-danger"></span>
-
-
+           <div class="form-group">
             <label asp-for="Email"><i class="fa fa-envelope"></i> Почта</label>
             <input type="text" asp-for="Email" placeholder="user@example.com">
             <span asp-validation-for="Email" class="text-danger"></span>
-
-
-            <label asp-for="Address"><i class="fa fa-address-card-o"></i> Адрес</label>
-            <input type="text" asp-for="Address"  placeholder="Тверская улица, дом 13.">
-            <span asp-validation-for="Address" class="text-danger"></span>
-
-            <label asp-for="City"><i class="fa fa-institution"></i> Город</label>
-            <input type="text" asp-for="City"  placeholder="Москва">
-            <span asp-validation-for="City" class="text-danger"></span>
-
+            </div>
+           <div class="form-group">
+                <label asp-for="Address"><i class="fa fa-address-card-o"></i> Адрес</label>
+                <input type="text" asp-for="Address"  placeholder="Тверская улица, дом 13.">
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+           <div class="form-group">
+                <label asp-for="City"><i class="fa fa-institution"></i> Город</label>
+                <input type="text" asp-for="City"  placeholder="Москва">
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
             <div class="row">
               <div class="col-50">
+
                 <label asp-for="State">Государство</label>
                 <input type="text" asp-for="State" placeholder="Россия">
                 <span asp-validation-for="State" class="text-danger"></span>

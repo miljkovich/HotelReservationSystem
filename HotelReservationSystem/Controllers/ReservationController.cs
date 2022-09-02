@@ -119,15 +119,19 @@ namespace HotelReservationSystem.Controllers
             if (reservation == null)
                 return NotFound();
 
-            ConfirmPaymentVM model = new ConfirmPaymentVM { Reservation = reservation };
+            ConfirmPaymentVM model = new ConfirmPaymentVM { ReservationId = id,Reservation = reservation };
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmPayment([Bind("Reservation,FullName,Email,Addreses,City,ZipCode,State,CardName,CardNumber,ExpMonth,ExpYear,CVV")] ConfirmPaymentVM model)
+        public async Task<IActionResult> ConfirmPayment([Bind("ReservationId,FullName,Email,Addreses,City,ZipCode,State,CardName,CardNumber,ExpMonth,ExpYear,CVV")] ConfirmPaymentVM model)
         {
+            model.Reservation = await _db.Reservations.Where(r => r.Id == model.ReservationId).Include(r => r.ApplicationUser).Include(r => r.Room).ThenInclude(r => r.RoomType).SingleOrDefaultAsync();
+            if (model.Reservation == null)
+                return NotFound();
+
             if (ModelState.IsValid)
             {
                 //reservation.Paid = true;
