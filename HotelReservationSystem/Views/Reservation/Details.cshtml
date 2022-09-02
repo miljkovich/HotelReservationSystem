@@ -109,7 +109,7 @@
                 <a type="button" class="btn btn-primary w-500" asp-area="" asp-controller="Reservation" asp-action="MyReservations" >Назад</a>
             @if (!Model.Paid)
             {
-                <button type="button" class="btn btn-success"> Оплатить</button>
+                <a type="button" class="btn btn-success" asp-action="ConfirmPayment" asp-route-id="@Model.Id"> Оплатить</a>
             }
             </div>
 
