@@ -113,6 +113,44 @@ namespace HotelReservationSystem.Controllers
 
         }
 
+        public async Task<IActionResult> ConfirmPayment(int id)
+        {
+            var reservation = await _db.Reservations.Where(r => r.Id == id).Include(r => r.ApplicationUser).Include(r => r.Room).ThenInclude(r => r.RoomType).SingleOrDefaultAsync();
+            if (reservation == null)
+                return NotFound();
+
+            ConfirmPaymentVM model = new ConfirmPaymentVM { Reservation = reservation };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmPayment([Bind("Reservation,FullName,Email,Addreses,City,ZipCode,State,CardName,CardNumber,ExpMonth,ExpYear,CVV")] ConfirmPaymentVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                //reservation.Paid = true;
+                //_db.SaveChanges();
+                //open view with the check
+
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Pay(int id)
+        {
+            var reservation = await _db.Reservations.Where(r => r.Id == id).Include(r => r.ApplicationUser).Include(r => r.Room).ThenInclude(r => r.RoomType).SingleOrDefaultAsync();
+            if (reservation == null)
+                return NotFound();
+
+            reservation.Paid = true;
+            _db.SaveChanges();
+
+            return View("Details", reservation);
+        }
+
         private bool InputDatesValid(DateTime checkIn, DateTime checkOut)
         {
             if (checkIn >= checkOut) 
