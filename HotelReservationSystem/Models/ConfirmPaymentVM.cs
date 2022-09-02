@@ -7,60 +7,58 @@ namespace HotelReservationSystem.Models
         [Required]
         public int ReservationId { get; set; }
 
-        public Reservation Reservation { get; set; }
+        public Reservation ?Reservation { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите ФИО")]
         [Display(Name="ФИО")]
         public string FullName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите Почту")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите Адресс")]
         [MaxLength(200)]
         [Display(Name = "Адресс")]
-
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите Город")]
         [MaxLength(200)]
         [Display(Name = "Город")]
         public string City { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите Почтовый индекс")]
         [MaxLength(10)]
         [Display(Name = "Почтовый индекс")]
         public string ZipCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите Государство")]
         [Display(Name = "Государство")]
         public string State { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите 'Имя на карте'")]
         [Display(Name = "Имя на карте")]
         public string CardName { get; set; }
 
-        [Required]
-        [CreditCard]
+        [Required(ErrorMessage = "Введите Номер Карты")]
+        [CreditCard(ErrorMessage = "Неправильно введён номер карты.")]
         [Display(Name = "Номер Карты")]
         public string CardNumber { get; set; }
 
-        [Required]
-        [MinLength(2)]
-        [MaxLength(2)]
+        [Required(ErrorMessage = "Введите Exp Month")]
+        [StringLength(2)]
         [Display(Name = "Exp Month")]
         public string ExpMonth { get; set; }
 
-        [Required]
-        [MinLength(4)]
-        [MaxLength(4)]
+        [Required(ErrorMessage = "Введите Exp Year")]
+        [MinLength(4, ErrorMessage = "Неправильно введен год действия карты") ]
+        [MaxLength(4, ErrorMessage = "Неправильно введен год действия карты")]
         [Display(Name = "Exp Year")]
         public string ExpYear { get; set; }
 
-        [Required]
-        [MinLength(3)]
-        [MaxLength(3)]
+        [Required(ErrorMessage = "Введите CVV")]
+        [MinLength(3,ErrorMessage = "CVV представляет собой трех или четырехзначный код.")]
+        [MaxLength(4, ErrorMessage = "CVV представляет собой трех или четырехзначный код.")]
         [Display(Name = "CVV")]
         public string CVV { get; set; }
 

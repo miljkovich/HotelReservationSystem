@@ -4,6 +4,7 @@ using HotelReservationSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace HotelReservationSystem.Controllers
 {
@@ -126,12 +127,13 @@ namespace HotelReservationSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmPayment([Bind("ReservationId,FullName,Email,Addreses,City,ZipCode,State,CardName,CardNumber,ExpMonth,ExpYear,CVV")] ConfirmPaymentVM model)
+        public async Task<IActionResult> ConfirmPayment([Bind("ReservationId,FullName,Email,Address,City,ZipCode,State,CardName,CardNumber,ExpMonth,ExpYear,CVV")] ConfirmPaymentVM model)
         {
             model.Reservation = await _db.Reservations.Where(r => r.Id == model.ReservationId).Include(r => r.ApplicationUser).Include(r => r.Room).ThenInclude(r => r.RoomType).SingleOrDefaultAsync();
             if (model.Reservation == null)
                 return NotFound();
 
+            IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
                 //reservation.Paid = true;
