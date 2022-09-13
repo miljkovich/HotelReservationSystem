@@ -7,7 +7,7 @@ namespace HotelReservationSystem.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
-        [Display(Name = "Номер номера")]
+        [Display(Name = "Номер")]
 
         public string RoomNumber { get; set; } = null!;
         [Display(Name = "Тип Номера")]
@@ -15,7 +15,7 @@ namespace HotelReservationSystem.Models
         public int RoomTypeId { get; set; }
         [Display(Name = "Тип Номера")]
         public RoomType? RoomType { get; set; }
-
+        
         [Display(Name = "Резервации")]
         public ICollection<Reservation> ?Reservations { get; set; }
     }
