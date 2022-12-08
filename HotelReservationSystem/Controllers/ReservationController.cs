@@ -136,16 +136,15 @@ namespace HotelReservationSystem.Controllers
             IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
-                //reservation.Paid = true;
-                //_db.SaveChanges();
-                //open view with the check
-
+                model.Reservation.Paid = true;
+                _db.SaveChanges();
+                
             }
 
             return View(model);
         }
 
-        public async Task<IActionResult> Pay(int id)
+        public async Task<IActionResult> Payed(int id)
         {
             var reservation = await _db.Reservations.Where(r => r.Id == id).Include(r => r.ApplicationUser).Include(r => r.Room).ThenInclude(r => r.RoomType).SingleOrDefaultAsync();
             if (reservation == null)
