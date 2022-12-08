@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body class="w3-light-grey">
@@ -21,6 +22,7 @@
       <a class="w3-bar-item w3-button w3-red w3-mobile" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-bed w3-margin-right"></i>Лого</a>
       <a href="#rooms" class="w3-bar-item w3-button w3-mobile">Номера</a>
       <a href="#about" class="w3-bar-item w3-button w3-mobile">О нас</a>
+      <a href="#services" class="w3-bar-item w3-button w3-mobile">Услуги</a>
       <a href="#contact" class="w3-bar-item w3-button w3-mobile">Контакт</a>
       <partial name="_LoginPartial" />
     </header>
@@ -29,7 +31,93 @@
             @RenderBody()
         </main>
     </div>
+    
+  <div class="w3-row-padding" id="about">
+    <div class="w3-col l4 12">
+      <h3>О нос:</h3>
+      <h5>Our hotel is one of a kind. It is truely amazing. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</h5>
+    <p>We accept: <i class="fa fa-credit-card w3-large"></i> <i class="fa fa-cc-mastercard w3-large"></i> <i class="fa fa-cc-amex w3-large"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal w3-large"></i></p>
+    </div>
+    <div class="w3-col l8 12">
+      <!-- Image of location/map -->
+      <img src="https://www.w3schools.com/w3images/map.jpg" class="w3-image w3-greyscale" style="width:100%;">
+    </div>
+  </div>
+  
+  <div class="w3-row-padding w3-large w3-center" style="margin:32px 0">
+    <div class="w3-third"><i class="fa fa-map-marker w3-text-red"></i> 423 Какой-то адрес, Москва, Россия</div>
+    <div class="w3-third"><i class="fa fa-phone w3-text-red"></i> Телефон: +7 123456</div>
+    <div class="w3-third"><i class="fa fa-envelope w3-text-red"></i> Почта: mail@mail.com</div>
+  </div>
 
+  <div class="w3-panel w3-red w3-leftbar w3-padding-32">
+    <h5><i class="fa fa-info w3-deep-orange w3-padding w3-margin-right"></i> Мы можем предложить ремонт одежды и обуви, химчистку, playstation, обмен валюты, сауну, бассейн, баню, фитнес-зал и т. д.</h5>
+  </div>
+
+   <div class="w3-container">
+    <h2>Наши услуги:</h2>
+  </div>
+  
+  <div id="services" class="w3-row-padding w3-padding-16 w3-text-white w3-large">
+    <div class="w3-half w3-margin-bottom">
+      <div class="w3-display-container">
+        <img src="https://www.spa82.ru/wp-content/uploads/2021/01/banya-1.jpg" alt="banya" style="height:516px" width="100%">
+        <span class="w3-display-bottomleft w3-padding">Баня</span>
+      </div>
+    </div>
+    <div class="w3-half">
+      <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-half w3-margin-bottom">
+          <div class="w3-display-container">
+            <img src="https://img.freepik.com/premium-photo/spa-massage-tools-women-getting-massage-background_394555-863.jpg?w=2000" alt="spa" style="width:100%" height="250px">
+            <span class="w3-display-bottomleft w3-padding">Спа</span>
+          </div>
+        </div>
+        <div class="w3-half w3-margin-bottom">
+          <div class="w3-display-container">
+            <img src="http://cdn.cnn.com/cnnnext/dam/assets/160502155618-terranea-vista-pool.jpg" alt="Бассейн" style="width:100%" height="250px">
+            <span class="w3-display-bottomleft w3-padding">Бассейн</span>
+          </div>
+        </div>
+      </div>
+      <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-half w3-margin-bottom">
+          <div class="w3-display-container">
+            <img src="data:image/jpeg;base64,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" alt="Gym" style="width:100%" height="250px">
+            <span class="w3-display-bottomleft w3-padding">Фитнес-зал</span>
+          </div>
+        </div>
+        <div class="w3-half w3-margin-bottom">
+          <div class="w3-display-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrE-bCMQKlQPVjlGzMQh2Rcn_YgPa1TJE6P7tOfG28ZcOJgHohfIY5naa2qXuW6dBQM9w&usqp=CAU" alt="PS" style="width:100%" height="250px">
+            <span class="w3-display-bottomleft w3-padding">PlayStation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
+    <h2>Получайте лучшие предложения первыми!</h2>
+    <p>Подпишитесь на нашу рассылку.</p>
+    <label>Почта</label>
+    <input class="w3-input w3-border" type="text" placeholder="Ваша почта">
+    <button type="button" class="w3-button w3-red w3-margin-top">Подписаться</button>
+  </div>
+
+  <div class="w3-container" id="contact">
+    <h2>Контакт</h2>
+    <p>Если у вас есть какие-либо вопросы, не стесняйтесь задать их.</p>
+    <i class="fa fa-map-marker w3-text-red" style="width:30px"></i> 423 Какой-то адрес, Москва, Россия<br>
+    <i class="fa fa-phone w3-text-red" style="width:30px"></i> Телефон: +7 123456<br>
+    <i class="fa fa-envelope w3-text-red" style="width:30px"> </i> Почта: mail@mail.com<br>
+    <form action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Имя" required name="Name"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Почта" required name="Email"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Сообщение" required name="Message"></p>
+      <p><button class="w3-button w3-black w3-padding-large" type="submit">Отправить</button></p>
+    </form>
+  </div>
     <footer class="w3-padding-32 w3-black w3-center w3-margin-top">
       <h5>ГДЕ НАС НАЙТИ</h5>
       <div class="w3-xlarge w3-padding-16">
